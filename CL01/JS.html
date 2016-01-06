@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JS</title>
+
+	<script type = "text/javascript">
+	
+	// 函數 ********************************
+		
+	function test() {
+		alert("Hello");
+	};
+	test();
+	
+	var test1 = function() {
+		alert("Hello 1");	
+	};
+	test1();
+
+	// 匿名函式 ********************************
+	(function() {
+		alert("Hello 2");
+	})();
+
+	// 使用參數 ********************************
+	(function(n1, n2){
+		alert(n1 * n2)
+	})(3, 4);
+
+	// 排程 ********************************
+	function go() {
+		alert("Timeout 1");
+	};
+	window.setTimeout(go, 1000);
+
+	// - Combine
+	window.setTimeout(function go() {
+		alert("Timeout 2");
+	}, 1000);	
+
+
+
+	</script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

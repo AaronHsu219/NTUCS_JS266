@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JSON2</title>
+	
+	<script type="text/javascript">
+
+	/*
+	var obj = new Object();
+	obj.x = 7;
+	obj.y = 5;
+	obj.getPosition = function() {
+		alert(this.x + ","+ this.y);
+	};
+	*/
+
+	/*JSON: JavaScript Object Notation*/
+	function show(args) {
+		alert(args.x + "," + args.y)
+	}
+
+	// ex1
+	var obj = {"x":4, "y":5};
+	show(obj);
+
+	// ex2
+	show({
+		"x":7, 
+		"y":8, 
+		"getPosition": function() {
+			alert(this.x + ","+ this.y);
+		}
+	});
+
+	</script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
