@@ -1,0 +1,11 @@
+google map api
+
+object
+
+
+	dragable
+	mapTypeId
+
+
+setCenter
+panTo

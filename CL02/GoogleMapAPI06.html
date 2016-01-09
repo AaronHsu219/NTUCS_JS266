@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+<!-- style ************************************************************** -->
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+
+<!-- js ****************************************************************** -->
+
+    <script>
+    var data = [
+      {name:"高進發彩券行", address:"台北市中正區羅斯福路四段24巷14之1號"},
+      {name:"金超群彩券行", address:"台北市中正區中華路二段311巷2號"},
+      {name:"全聯運彩商行", address:"台北市中正區忠孝東路一段80號1樓"},
+      {name:"懋昇商行", address:"台北市萬華區萬大路281號"},
+      {name:"智傑彩券行", address:"台北市萬華區長順街1號"},
+      {name:"金財運動彩券行", address:"台北市萬華區中華路2段362號1樓"}
+    ];
+
+      var map;
+      var geocoder;
+
+      function initMap() {
+        // 準備地圖物件
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 25.04, lng: 121.51}, //25.0395772,121.5181488,14
+          zoom: 14
+        });
+        // 準備 geocoder 物件
+        geocoder = new google.maps.Geocoder();
+        // 顯示投注站在地圖上
+        for (var i = 0; i < data.length; i++) {
+          showMarker(data[i])
+        };
+      }
+
+      function showMarker(site) {
+        geocoder.geocode({address:site.address}, function(result, status) {
+          // 根據得到的經緯度建立標示
+          var position = result[0].geometry.location;
+          var marker = new google.maps.Marker({
+            position: position,
+            map: map
+          });
+          // 在標示上面註冊點擊事件，點擊後產生訊息視窗
+          google.maps.event.addListener(marker, "click", function() {
+            // 當使用著點擊 marker 的時候，執行這裡的程式碼            
+            var info = new google.maps.InfoWindow({
+              content: "<b>" + site.name + "</b>" + "<br>" + site.address
+            });            
+            info.open(map, marker);
+          });
+
+
+        });        
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+    async defer></script>
+
+  </head>
+<!-- html ********************************************************************** -->
+  <body>
+    <div id="map"></div>
+
+  </body>
+</html>

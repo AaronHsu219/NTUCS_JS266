@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GoogleMapAPI05</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  
+    <script>
+      /*global variable*/
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 21, lng: 121},
+          zoom: 7,
+          draggable: true,
+          mapTypeId: google.maps.MapTypeId.SATELLITE
+        });
+
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({address:"台灣大學"}, function(result/*結果*/, status/*狀態*/) {
+              var latlng = result[0].geometry.location;
+              var marker = new google.maps.Marker({
+                position:latlng,
+                map:map
+              });
+        });
+        
+
+        // alert(google.maps.MapTypeId.SATELLITE);  // check variable 
+        // var image = '1452363108_Old-Car-2.png';        
+
+/*        var marker = new google.maps.Marker({
+          position:{lat: 21, lng:121},
+          map: map,
+          // icon: image
+        }); // constructor*/
+
+        /*var info = new google.maps.InfoWindow({
+          content:"Hello <b>World</b>",
+          //position:{lat: 21, lng:121}
+        });
+        info.open(map, marker);*/
+
+        google.maps.event.addListener(marker, "click", function() {
+          // 當使用著點擊 marker 的時候，執行這裡的程式碼
+          var info = new google.maps.InfoWindow({
+          content:"Hello <b>World</b>"
+          });
+          info.open(map, marker);
+        })
+
+      }
+    </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+    <!-- note: callback=initMap -->
+
+    <!-- Test for map object method -->
+    <script>
+      function change(lat, lng) {
+        // map.setCenter({lat: lat, lng: lng});
+        map.panTo({lat: lat, lng: lng});
+      }
+    </script>
+
+  </head>
+  <!-- html **************************************************************************** -->
+  <body>
+    <button onclick="change(23, 121);">Taiwan</button>
+    <button onclick="change(-34.397, 150.644);">Australia</button>
+    <div id="map"></div>
+
+
+  </body>
+</html>

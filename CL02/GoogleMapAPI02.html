@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GoogleMapAPI02</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  
+    <script>
+      /*global variable*/
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8,
+          draggable: true,
+          mapTypeId: google.maps.MapTypeId.SATELLITE
+        });
+        // alert(google.maps.MapTypeId.SATELLITE);  // check variable 
+      }
+    </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+    <!-- note: callback=initMap -->
+
+    <!-- Test for map object method -->
+    <script>
+      function change(lat, lng) {
+        // map.setCenter({lat: lat, lng: lng});
+        map.panTo({lat: lat, lng: lng});
+      }
+    </script>
+
+  </head>
+  <!-- html **************************************************************************** -->
+  <body>
+    <button onclick="change(23, 121);">Taiwan</button>
+    <button onclick="change(-34.397, 150.644);">Australia</button>
+    <div id="map"></div>
+
+
+  </body>
+</html>
