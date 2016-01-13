@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>pt4</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <style>
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #map {
+    height: 100%;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+  var map;
+  var sercie;
+  var orin;
+  var des;
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: 25,
+        lng: 121.5
+      },
+      zoom: 12
+    });
+    // 新增一個地圖上的點擊事件處理器
+    google.maps.event.addListener(map, "click", function(e) {
+      if (orin == null) { // 沒有起點，紀錄起點
+        orin = e.latLng;
+      } else { // 有起點，紀錄終點，順便做路徑規劃
+        des = e.latLng;
+        route();
+      };
+    });
+
+    google.maps.event.addListener(map, "zoom_changed", function(e) {
+      alert("zoom_changed");
+    });
+  }
+
+  function route() {
+    service = new google.maps.DirectionsService();
+    service.route({
+      origin: orin,
+      destination: des,
+      travelMode: google.maps.TravelMode.TRANSIT
+    }, function(result, status) {
+      // console.log(result);
+      // 繪製路徑
+      new google.maps.DirectionsRenderer({
+        map: map,
+        directions: result
+      });
+    });
+  }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+</body>
+
+</html>

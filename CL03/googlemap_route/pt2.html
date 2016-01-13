@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple Map</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <style>
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #map {
+    height: 100%;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+  var map;
+  var sercie;
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: 25,
+        lng: 121.5
+      },
+      zoom: 12
+    });
+
+    service = new google.maps.DirectionsService();
+    service.route({
+      origin: "台北市羅斯福路四段一號",
+      destination: "台北市南京東路五段192巷",
+      travelMode: google.maps.TravelMode.TRANSIT
+    }, function(result, status) {
+      // console.log(result);
+      new google.maps.DirectionsRenderer({
+        map: map,
+        directions: result
+      });
+    });
+  }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+</body>
+
+</html>
